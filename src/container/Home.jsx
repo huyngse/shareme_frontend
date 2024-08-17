@@ -9,19 +9,19 @@ import { useEffect } from 'react';
 import { userQuery } from '../utils/data';
 import { client } from '../client';
 import Pins from './Pins';
+import { fetchUser } from '../utils/fetchUser';
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(true);
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
-  const userInfo = localStorage.getItem('user') !== undefined
-    ? JSON.parse(localStorage.getItem('user'))
-    : localStorage.clear();
+  const userInfo = fetchUser();
   useEffect(() => {
     const query = userQuery(userInfo?.sub);
     client.fetch(query).then((data) => {
       setUser(data[0]);
     });
-  }, [userInfo]);
+    // eslint-disable-next-line
+  }, []);
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
   }, [])
