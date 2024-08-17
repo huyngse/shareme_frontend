@@ -14,6 +14,7 @@ const CreatePin = ({ user }) => {
   const [category, setCategory] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(false);
+  const [savingPin, setSavingPin] = useState(false);
   const navigate = useNavigate();
   const uploadImage = (e) => {
     const { type, name } = e.target.files[0];
@@ -38,6 +39,7 @@ const CreatePin = ({ user }) => {
   }
   const savePin = () => {
     if (title && about && destination && imageAsset?._id && category) {
+      setSavingPin(true);
       const doc = {
         _type: 'pin',
         title,
@@ -57,12 +59,13 @@ const CreatePin = ({ user }) => {
         },
         category,
       }
-      client.create(doc).then(() => { 
-        navigate('/')
+      client.create(doc).then(() => {
+        navigate('/');
+        setSavingPin(false);
       })
     } else {
       setFields(true);
-      setTimeout(() => {setFields(false)}, 2000)
+      setTimeout(() => { setFields(false) }, 2000)
     }
   }
   return (
@@ -108,7 +111,7 @@ const CreatePin = ({ user }) => {
                 </label>
               ) : (
                 <p className='relative h-full'>
-                  <img src={imageAsset?.url} alt="uploaded-picture" className='h-full w-full' />
+                  <img src={imageAsset?.url} alt="uploaded-picture" className='h-full w-full object-cover' />
                   <button
                     type='button'
                     className='absolute bottom-3 right-3 p-3 rounded-full bg-white text-xl outline-none hover:shadow-md transition-all duration-500 ease-in-out'
@@ -184,7 +187,7 @@ const CreatePin = ({ user }) => {
                 onClick={savePin}
                 className='bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none'
               >
-                Save Pin
+                {savingPin ? "Saving" : "Save Pin"}
               </button>
             </div>
           </div>
