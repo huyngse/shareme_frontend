@@ -8,3 +8,15 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
+
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
