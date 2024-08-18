@@ -1,8 +1,16 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./container/Home";
+import { useEffect } from "react";
+import { fetchUser } from "./utils/fetchUser";
 const App = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const user = fetchUser();
+    if (!user) navigate('/login');
+  }, []);
+
   return (
     <Routes>
       <Route path="login" element={<Login />} />
