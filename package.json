@@ -1,6 +1,7 @@
 {
   "name": "shareme_frontend",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@babel/plugin-transform-class-properties": "^7.24.7",
