@@ -112,7 +112,7 @@ const PinDetail = ({ user }) => {
           </div>
           <div className='flex flex-wrap mt-6 gap-3 items-center'>
             <Link to={`/user-profile/${user?._id}`}>
-              <img src={pinDetail.postedBy?.image} alt="user-profile" className='w-8 h-8 rounded-full object-cover' />
+              <img src={user?.image} alt="user-profile" className='w-8 h-8 rounded-full object-cover' />
             </Link>
             <input
               type="text"
